@@ -42,3 +42,11 @@ pnpm-debug.log*
 
 # Build
 .turbo/
+
+# database
+*.db
+*.sqlite
+*.db-journal
+
+# omc state
+.omc/
