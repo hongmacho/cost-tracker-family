@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가족 비용 추적 — 다음 단계 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 다크 모드 토글
+        if (localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+    </script>
+    <style>
+        body.dark { color-scheme: dark; }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">💰 가족 비용 추적</h1>
+                <p class="text-sm text-gray-600 dark:text-gray-400">다음 단계 가이드</p>
+            </div>
+            <div class="flex gap-4 items-center">
+                <a href="https://github.com/hongmacho/cost-tracker-family" target="_blank" rel="noopener noreferrer"
+                   class="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition">
+                    🔗 GitHub
+                </a>
+                <button onclick="toggleTheme()" class="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- 환영 섹션 -->
+        <section class="mb-12">
+            <div class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-8">
+                <h2 class="text-3xl font-bold mb-4">🎉 축하합니다!</h2>
+                <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                    가족 비용 추적 앱이 준비되었습니다. 이 가이드는 앱을 최대한 활용하기 위한 다음 단계를 제시합니다.
+                </p>
+                <p class="text-gray-600 dark:text-gray-400">
+                    현재 상태: <strong>MVP 완료</strong> (8개 페이지, 모든 핵심 기능 구현)
+                </p>
+            </div>
+        </section>
+
+        <!-- 빠른 시작 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">🚀 1단계: 빠른 시작</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">설치 & 실행</h3>
+                    <div class="space-y-3 text-sm font-mono bg-gray-100 dark:bg-gray-900 p-4 rounded">
+                        <div><span class="text-blue-600 dark:text-blue-400">$</span> npm install</div>
+                        <div><span class="text-blue-600 dark:text-blue-400">$</span> npm run dev</div>
+                        <div><span class="text-gray-500">→ localhost:3000</span></div>
+                    </div>
+                    <label class="flex items-center gap-2 mt-4 cursor-pointer">
+                        <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                        <span>설치 완료</span>
+                    </label>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">첫 번째 그룹 만들기</h3>
+                    <ol class="space-y-2 text-sm">
+                        <li>✓ 대시보드 방문 (http://localhost:3000/dashboard)</li>
+                        <li>✓ "새 그룹 만들기" 클릭</li>
+                        <li>✓ 그룹명 입력 (예: 가족, 여행)</li>
+                        <li>✓ 멤버 2명 이상 추가</li>
+                        <li>✓ "그룹 생성" 클릭</li>
+                    </ol>
+                    <label class="flex items-center gap-2 mt-4 cursor-pointer">
+                        <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                        <span>첫 그룹 생성 완료</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 기능 활용 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">✨ 2단계: 핵심 기능 활용</h2>
+            <div class="space-y-4">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">💰</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold mb-2">지출 기록</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                그룹 상세에서 "지출 추가" → 항목명, 금액, 결제자, 참여자 선택 → 자동 정산 계산
+                            </p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                                <span class="text-sm">5개 이상 지출 기록함</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">📊</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold mb-2">대시보드 & 통계</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                대시보드에서 전체 지출, 월별 추이, 카테고리별 분석 확인
+                            </p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                                <span class="text-sm">대시보드 확인함</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">🔍</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold mb-2">검색 & 필터</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                지출 목록에서 항목명 검색, 카테고리/날짜 필터로 상세 조회
+                            </p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                                <span class="text-sm">검색/필터 사용함</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">💸</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold mb-2">정산 관리</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                "정산" 탭에서 누가 누구에게 얼마를 줄지 확인 → "정산 완료" 표시
+                            </p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                                <span class="text-sm">정산 완료 표시함</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">📥</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold mb-2">데이터 내보내기</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                설정 페이지에서 "데이터 내보내기" → CSV 파일 다운로드 → 엑셀에서 열기
+                            </p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                                <span class="text-sm">CSV 내보내기 테스트함</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 다음 단계 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">🎯 3단계: 다음 단계 (개선 사항)</h2>
+            <div class="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6 mb-6">
+                <h3 class="font-bold mb-2">🔄 우선순위 개선 사항</h3>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                    다음 기능들이 계획 중입니다. 원하는 기능을 체크해주세요!
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-4">📱 1~3개월 (빠른 개선)</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-green-600 rounded">
+                            <span class="text-sm">E2E 테스트 추가</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-green-600 rounded">
+                            <span class="text-sm">다크 모드 지원</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-green-600 rounded">
+                            <span class="text-sm">정산 완료 알림</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-4">🚀 3~6개월 (주요 기능)</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                            <span class="text-sm">그룹 공유 링크/QR</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                            <span class="text-sm">반복 지출 자동화</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-blue-600 rounded">
+                            <span class="text-sm">영수증 OCR 인식</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-4">💰 성장 전략</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-purple-600 rounded">
+                            <span class="text-sm">유튜브 튜토리얼</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-purple-600 rounded">
+                            <span class="text-sm">결제 연동 (Toss)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-purple-600 rounded">
+                            <span class="text-sm">모바일 앱 (React Native)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-4">📊 기술 개선</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
+                            <span class="text-sm">단위 테스트 (Jest)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
+                            <span class="text-sm">성능 최적화</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                            <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
+                            <span class="text-sm">에러 처리 강화</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">❓ 자주 묻는 질문</h2>
+            <div class="space-y-4">
+                <details class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer">
+                    <summary class="font-bold text-lg">데이터는 어디에 저장되나요?</summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">
+                        모든 데이터는 로컬 SQLite 데이터베이스에 저장됩니다 (클라우드 없음). 데이터는 당신의 컴퓨터에만 있습니다.
+                    </p>
+                </details>
+
+                <details class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer">
+                    <summary class="font-bold text-lg">그룹에 다른 사람을 추가할 수 있나요?</summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">
+                        현재는 같은 컴퓨터에서만 사용 가능합니다. 향후 그룹 공유 링크/QR 코드 기능을 추가할 예정입니다.
+                    </p>
+                </details>
+
+                <details class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer">
+                    <summary class="font-bold text-lg">정산 계산은 어떻게 작동하나요?</summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">
+                        Greedy 알고리즘을 사용해 최소 거래 수로 모든 사람이 정산되도록 계산합니다. 예: A가 ₩10,000 더 지출했고 B가 ₩5,000 더 지출했다면, C가 A에게 ₩10,000, B에게 ₩5,000을 주는 대신 C가 A에게 ₩15,000을 주면 끝!
+                    </p>
+                </details>
+
+                <details class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer">
+                    <summary class="font-bold text-lg">백업은 어떻게 하나요?</summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">
+                        설정 페이지에서 "데이터 내보내기"로 CSV 파일을 다운로드해 정기적으로 백업하세요. 향후 자동 백업 기능을 추가할 예정입니다.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- 지원 -->
+        <section class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-8 mb-12">
+            <h2 class="text-2xl font-bold mb-4">🤝 지원 & 피드백</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                버그 리포트, 기능 요청, 피드백은 <a href="https://github.com/hongmacho/cost-tracker-family/issues" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub Issues</a>에서 제출해주세요.
+            </p>
+            <div class="flex gap-4 flex-wrap">
+                <a href="https://github.com/hongmacho/cost-tracker-family" target="_blank" rel="noopener noreferrer"
+                   class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                    🔗 GitHub 저장소
+                </a>
+                <a href="https://github.com/hongmacho/cost-tracker-family/issues" target="_blank" rel="noopener noreferrer"
+                   class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition">
+                    📝 이슈 제출
+                </a>
+            </div>
+        </section>
+
+        <!-- 완료 체크 -->
+        <section class="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-8">
+            <h2 class="text-2xl font-bold mb-4">✅ 완료 체크리스트</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">위의 모든 항목을 체크했나요? 축하합니다! 🎉</p>
+            <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-green-100 dark:hover:bg-green-900/50 rounded">
+                <input type="checkbox" class="w-6 h-6 text-green-600 rounded" id="finalCheck">
+                <span class="text-lg font-bold">모든 단계를 완료했습니다</span>
+            </label>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+            <p>Made with ❤️ for families, roommates, and friend groups</p>
+            <p class="text-sm mt-2">© 2026 Cost Tracker Family | MIT License</p>
+        </div>
+    </footer>
+
+    <script>
+        // 테마 아이콘 업데이트
+        function updateThemeIcon() {
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+        }
+        updateThemeIcon();
+
+        // 체크박스 상태 로컬스토리지 저장
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            const key = `checkbox_${Math.random()}`;
+            const saved = localStorage.getItem(key);
+            if (saved) checkbox.checked = saved === 'true';
+
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(key, checkbox.checked);
+            });
+        });
+    </script>
+</body>
+</html>
