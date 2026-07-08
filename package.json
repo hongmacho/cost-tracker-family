@@ -1,0 +1,52 @@
+{
+  "name": "cost-tracker-family",
+  "version": "0.1.0",
+  "description": "가족 비용 추적 간편형 - 공유 지출 정산 앱",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "db:push": "drizzle-kit push:sqlite",
+    "db:generate": "drizzle-kit generate:sqlite"
+  },
+  "dependencies": {
+    "next": "16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "drizzle-orm": "^0.35.1",
+    "better-sqlite3": "^11.1.2",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-checkbox": "^1.1.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-tabs": "^1.0.4",
+    "@radix-ui/react-popover": "^1.0.7",
+    "lucide-react": "^0.294.0",
+    "date-fns": "^3.0.0",
+    "recharts": "^2.10.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.2.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "16.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "drizzle-kit": "^0.20.14",
+    "tailwindcss": "^3.3.6",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16",
+    "@types/node": "^20.10.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/better-sqlite3": "^7.6.8"
+  }
+}
