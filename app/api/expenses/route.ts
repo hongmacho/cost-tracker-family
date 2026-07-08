@@ -9,9 +9,15 @@ import type { ApiResponse, CreateExpenseInput } from '@/lib/types'
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json() as CreateExpenseInput
+    const body = await request.json()
 
-    const descErrors = validateExpenseDescription(body.description)
+    // Parse date string to Date object
+    const parsedBody: CreateExpenseInput = {
+      ...body,
+      date: typeof body.date === 'string' ? new Date(body.date) : body.date,
+    }
+
+    const descErrors = validateExpenseDescription(parsedBody.description)
     if (descErrors.length > 0) {
       return NextResponse.json(
         { success: false, error: descErrors[0].message } as ApiResponse,
@@ -19,7 +25,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const amountErrors = validateExpenseAmount(body.amount)
+    const amountErrors = validateExpenseAmount(parsedBody.amount)
     if (amountErrors.length > 0) {
       return NextResponse.json(
         { success: false, error: amountErrors[0].message } as ApiResponse,
@@ -28,8 +34,8 @@ export async function POST(request: Request) {
     }
 
     const splitErrors = validateExpenseSplits(
-      body.splits.map((s) => s.memberId),
-      body.amount
+      parsedBody.splits.map((s) => s.memberId),
+      parsedBody.amount
     )
     if (splitErrors.length > 0) {
       return NextResponse.json(
@@ -38,7 +44,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const expense = await expenseRepository.create(body)
+    const expense = await expenseRepository.create(parsedBody)
 
     return NextResponse.json(
       {
