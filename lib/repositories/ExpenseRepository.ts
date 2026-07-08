@@ -65,23 +65,25 @@ export class ExpenseRepository {
     dateTo?: Date,
     paidBy?: string
   ) {
-    let query = db.query.expenses.findMany({
-      where: and(
-        eq(schema.expenses.groupId, groupId),
-        search ? like(schema.expenses.description, `%${search}%`) : undefined,
-        category ? eq(schema.expenses.category, category) : undefined,
-        dateFrom ? gte(schema.expenses.date, dateFrom) : undefined,
-        dateTo ? lte(schema.expenses.date, dateTo) : undefined,
-        paidBy ? eq(schema.expenses.paidBy, paidBy) : undefined
-      ),
+    const conditions: (ReturnType<typeof eq> | ReturnType<typeof like> | ReturnType<typeof gte> | ReturnType<typeof lte> | undefined)[] = [
+      eq(schema.expenses.groupId, groupId),
+      search ? like(schema.expenses.description, `%${search}%`) : undefined,
+      category && ['meal', 'transport', 'accommodation', 'other'].includes(category)
+        ? eq(schema.expenses.category, category as any)
+        : undefined,
+      dateFrom ? gte(schema.expenses.date, dateFrom) : undefined,
+      dateTo ? lte(schema.expenses.date, dateTo) : undefined,
+      paidBy ? eq(schema.expenses.paidBy, paidBy) : undefined,
+    ]
+
+    return db.query.expenses.findMany({
+      where: and(...conditions),
       with: {
         splits: true,
         paidByMember: true,
       },
       orderBy: (expenses) => sql`${expenses.date} DESC, ${expenses.createdAt} DESC`,
     })
-
-    return query
   }
 
   async update(id: string, input: UpdateExpenseInput): Promise<Expense> {

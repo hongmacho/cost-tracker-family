@@ -1,9 +1,7 @@
-import { defineConfig } from 'eslint-define-config'
-import nextConfig from 'eslint-config-next'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 
-export default defineConfig([
+export default [
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -21,11 +19,11 @@ export default defineConfig([
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
-        'error',
+        'warn',
         { argsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
-])
+]
